@@ -1,7 +1,14 @@
-# Add custom CSS tweaks to Slack css to set dark theme.
+# Unpack app.asar
+npm install -g asar
 
-SLACKPATH="/Applications/Slack.app/Contents/Resources/app.asar.unpacked/src/static/"
-for FILEPATH in index.js ssb-interop.js
+pushd /Applications/Slack.app/Contents/Resources/
+sudo asar extract app.asar app
+popd
+
+# Add custom CSS tweaks to Slack css to set dark theme.
+SLACKPATH="/Applications/Slack.app/Contents/Resources/app/dist/"
+
+for FILEPATH in ssb-interop.bundle.js
 do
     FULLPATH=$SLACKPATH$FILEPATH
     echo "Updating $FULLPATH"
